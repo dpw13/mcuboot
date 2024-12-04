@@ -612,7 +612,7 @@ if(SYSBUILD)
     endif()
 
     math(EXPR required_size "${key_size} + ${boot_magic_size} + ${boot_swap_data_size} + ${boot_status_data_size} + ${boot_tlv_estimate}")
-    align_up(${required_size} ${erase_size} required_size)
+    #align_up(${required_size} ${erase_size} required_size)
 
     if(CONFIG_SINGLE_APPLICATION_SLOT OR CONFIG_BOOT_FIRMWARE_LOADER)
       set(required_upgrade_size "0")
