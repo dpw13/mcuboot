@@ -36,6 +36,10 @@
 static bool saved_bootinfo = false;
 #endif
 
+#if defined(MCUBOOT_VERSION_AVAILABLE)
+static const char mcuboot_version_string[] = MCUBOOT_VERSION_STRING;
+#endif
+
 #if !defined(MCUBOOT_CUSTOM_DATA_SHARING_FUNCTION)
 /**
  * @var shared_memory_init_done
@@ -335,6 +339,13 @@ int boot_save_shared_data(const struct image_header *hdr, const struct flash_are
                                           BLINFO_BOOTLOADER_VERSION,
                                           sizeof(mcuboot_version),
                                           (void *)&mcuboot_version);
+    }
+
+    if (!rc) {
+        rc = boot_add_data_to_shared_area(TLV_MAJOR_BLINFO,
+                                          BLINFO_BOOTLOADER_VERSION_STR,
+                                          sizeof(mcuboot_version_string),
+                                          (void *)&mcuboot_version_string);
     }
 #endif
 
